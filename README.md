@@ -35,4 +35,4 @@ Este portfólio foi criado com foco em:
 
 ## 🔗 Acesse o projeto
 
-👉 https://wallisson531.github.io/Portifolio/
+👉 https://portifolio-wallisson531.vercel.app/
