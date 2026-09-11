@@ -5,96 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallisson Daniel / Desenvolvedor</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#habilidades">Habilidades</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#contato">Contato</a>
-        </nav>
+        <div class="nav-container">
+            <a href="#" class="logo">&lt;Wallisson<span> Daniel&gt;</span></a>
+            <nav class="nav-links">
+                <a href="#sobre">Sobre Mim</a>
+                <a href="#projeto">Projetos</a>
+                <a href="#contato">Contatos</a>
+            </nav>
+        </div> 
     </header>
 
-    <section id="home">
-            <h1>Wallisson Daniel</h1>
-            <h2>Desenvolvedor em Andamento</h2>
-            <p>Trasformando ideas em soluções digitais modernas.</p>
-
-        <div class="botaoes">
-            <a href="#" class="btn">Ver Projetos</a>
-            <a href="#" class="btn outline">Contatos</a>
+    <section class="hero">
+        <h2>Olá Meu Nome É</h2>
+        <h1>Wallisson Daniel</h1>
+        <h1 style="color: var(--text-muted); font-size: clamp(2rem, 5vw, 3.5rem);">Trasfomando suas ideas em soluções Digitais</h1>
+        <p>Desenvolvedor em desenvolvimento apaixonado pela area da tecnologia e trasformar ideas em ferramentas digitais.</p>
+        <div>
+            <a href="#projeto" class="btn-primary">Confira meus projetos</a>
         </div>
     </section>
 
-    <section id="habilidades">
-        <h2>Minha Habilidades</h2>
+    <section id="#sobre" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Olá, Me chamo Wallisson Daniel tenho 22 anos e sou de <strong>Cascavel PR</strong>, atuo na area de Analista de Qualidade, e estou cursando curso superior de <strong>Analise Desenvolvimento de Sistemas</strong>, estou em trasição de carreira para a area da tecnologia, tenho conhecimentos profissionais em Qualidade e estou em busca da minha primeira oportunidade na area da Tecnologia e Desenvolvimento</p><br>
 
-        <div class="grind">
-            <div class="card">HTML</div>
-            <div class="card">CSS</div>
-            <div class="card">JAVASCRIPT</div>
-            <div class="card">PYTHON</div>
-            <div class="card">GT/GITHUB</div>
+                    <p>Aqui estão algumas tecnologia com quais tenho conhecimento:</p>
+                    <ul class="tech-stack">
+                        <li>HTMl e CSS</li>
+                        <li>JavaScript</li>
+                        <li>Git e GitHub</li>
+                        <li>Python</li>
+                        <li>Banco de Dados (SQL)</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
-  <section id="projetos">
-    <h2>Projetos</h2>
+    <section id="projeto" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Meus Projetos</h2>
+            <div class="projects-grid">
+                <div class="project-content">
+                    <img src="imagem/projeto_pet.png" alt="projeto pet" class="project-img">
+                    <h3>Projeto de Landinpage de um PetShop</h3>
+                    <p>Projeto de uma landinpage informativa, criado para por em pratica os conhecimentos de HTML e CSS</p>
 
-    <div class="projeto-grid">
+                    <a href="https://github.com/Wallisson531/cantinho-do-pet" class="project-links" target="_blank">Ver no GitHub</a>
 
-        <div class="projeto">
-            <img src="imagem/projetoandroid.png" alt="">
-            <div>
-                <h3>Projeto Android </h3>
-                <p>Projeto realizado em aula com valor academico, com objetivo de por em pratica os conhecimentos adquiridos de HTML e CSS.</p>
-
-                 <p><a href="https://wallisson531.github.io/Projeto-Android/" target="_blank" class="btn">Acesse ao Projeto aqui</a></p>
-
-                <p><a href="https://github.com/Wallisson531/Projeto-Android" class="btn outline" target="_blank">Acesse pelo GitHub</a></p>
+                    <a href="https://wallisson531.github.io/cantinho-do-pet/" class="project-links" target="_blank">Acessar Projeto</a>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="projeto">
-            <img src="imagem/projetocordel.png" alt="projeto Cordel">
-            <div>
-                <h3>Projeto Cordel</h3>
-                <p>Projeto realizado em aula de um poema de Milton Duarte, com objetivo de aplicar conhecimentos de CSS e Efeito Paralax</p>
-
-                 <p><a href="https://wallisson531.github.io/Projeto-cordel/" target="_blank" class="btn">Acesse ao Projeto aqui</a></p>
-
-                <p><a href="https://github.com/Wallisson531/Projeto-cordel" class="btn outline" target="_blank">Acesse pelo GitHub</a></p>
-            </div>
-        </div>
-
-        <div class="projeto">
-           <img src="imagem/Lixo eletronico.png" alt="Lixo eletronico">
-           <div>
-                <h3>Projeto Lixo Eletrônico</h3>
-                <p>Projeto Realizado em Atividade avaliativa de um site de pesquisa sobre Lixo eletronico</p>
-
-               <p><a href="https://wallisson531.github.io/lixoeletronico/" target="_blank" class="btn">Acesse ao Projeto aqui</a></p>
-                <p><a href="https://github.com/Wallisson531/lixoeletronico" class="btn outline" target="_blank">Acesse pelo GitHub</a></p>
-           </div>
-        </div>
-
-    </div>
-</section>
-
-    <section id="contato">
-        <h2>Contatos</h2>
-        <p>Email: wallissondaniel541@gmail.com</p>
-       
-        <p>Whatsapp</p><a href="https://wa.me/5545998315472?text=Oi%20Wallisson%20vi%20seu%20portifolio!" target="_blank" class="btn"> Falar no WhatsApp
-        </a>
-
+    <section id="contato" class="section-padding" style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h2 class="section-title" style="justify-content: center;">&nbsp;Qual o próximo passo?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">No momento, estou em busca de novas oportunidades como desenvolvedor júnior. Se você tem uma vaga, uma pergunta, meu whatsapp esta logo abaixo!</p>
+        <a href="https://wa.me/5545998315472?text=Olá!%20vi%20seu portifolio%20gostaria%20de%20conversar%20" class="btn-primary" target="_blank">Entrar em contato</a>
     </section>
 
     <footer>
-        <p>&reg; 2026 Wallisson Daniel</p>
+        <p>Projetado e Desenvolvido por Wallisson Daniel &copy; 2026</p>
     </footer>
-
-    <script src="script.js"></script>
-</body>
 </html>
