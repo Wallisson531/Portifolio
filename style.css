@@ -299,3 +299,128 @@ footer p {
     color: var(--text-muted);
     font-size: 0.9rem;
 }
+
+/* ================================================================
+   Cole este bloco no FINAL do seu style.css
+   ================================================================ */
+
+/* Foco visível para quem navega pelo teclado */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* ---------- Link ativo no menu ---------- */
+.nav-links a.ativo {
+    color: var(--primary-color);
+}
+
+/* ---------- Cursor do efeito de digitação ---------- */
+.cursor {
+    display: inline-block;
+    width: 0.08em;
+    height: 1em;
+    margin-left: 0.12em;
+    vertical-align: -0.1em;
+    background-color: var(--primary-color);
+    animation: piscar 1s steps(1) infinite;
+}
+
+@keyframes piscar {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ---------- Botão do menu mobile (escondido no desktop) ---------- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--text-light);
+}
+
+@media (max-width: 640px) {
+    .nav-container {
+        padding: 1rem 1.25rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 0.75rem 1.25rem 1rem;
+        background-color: var(--bg-main);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-links.aberto {
+        display: flex;
+    }
+
+    .nav-links a {
+        margin-left: 0;
+        padding: 0.75rem 0;
+    }
+}
+
+/* ---------- Botão voltar ao topo ---------- */
+.voltar-topo {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, border-color 0.2s ease;
+    z-index: 900;
+}
+
+.voltar-topo.visivel {
+    opacity: 1;
+    visibility: visible;
+}
+
+.voltar-topo:hover {
+    border-color: var(--primary-color);
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+    .cursor {
+        animation: none;
+    }
+}
