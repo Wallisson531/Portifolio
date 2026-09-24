@@ -1,36 +1,81 @@
 @charset "UTF-8";
-
+ 
 :root {
+    color-scheme: dark;
     --bg-main: #0f172a; /* Fundo escuro */
     --bg-card: #1e293b; /* Fundo dos cards */
+    --bg-header: rgba(15, 23, 42, 0.9);
     --primary-color: #38bdf8; /* Azul claro (estilo React/Tech) */
+    --primary-soft: rgba(56, 189, 248, 0.1);
+    --on-primary: #0f172a; /* Cor do texto sobre botões preenchidos */
     --accent-color: #10b981; /* Verde (sucesso/terminal) */
     --text-light: #f8fafc;
     --text-muted: #94a3b8;
     --border-color: #334155;
+    --erro: #f87171;
 }
-
+ 
+/* Tema claro: só trocamos as variáveis, o resto do CSS continua igual */
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-header: rgba(248, 250, 252, 0.9);
+    --primary-color: #0369a1;
+    --primary-soft: rgba(3, 105, 161, 0.08);
+    --on-primary: #ffffff;
+    --accent-color: #047857;
+    --text-light: #0f172a;
+    --text-muted: #475569;
+    --border-color: #cbd5e1;
+    --erro: #b91c1c;
+}
+ 
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-
+ 
+/* Sem rolagem suave para quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto;
+    }
+}
+ 
+/* Quem tem o atributo hidden precisa sumir mesmo com display:flex nas classes */
+[hidden] {
+    display: none !important;
+}
+ 
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+ 
 body {
     background-color: var(--bg-main);
     color: var(--text-light);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+ 
+body.sem-rolagem {
+    overflow: hidden; /* trava a página enquanto o modal está aberto */
+}
+ 
 .code-font {
     font-family: 'Fira Code', monospace;
     color: var(--primary-color);
 }
-
+ 
+/* ---------- Cabeçalho ---------- */
+ 
 header {
-    background-color: rgba(15, 23, 42, 0.9);
+    background-color: var(--bg-header);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     position: fixed;
@@ -38,7 +83,7 @@ header {
     top: 0;
     z-index: 1000;
 }
-
+ 
 .nav-container {
     max-width: 1200px;
     margin: 0px auto;
@@ -47,7 +92,7 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
+ 
 .logo {
     font-size: 1.5rem;
     font-weight: 500;
@@ -58,7 +103,11 @@ header {
 .logo span {
     color: var(--primary-color);
 }
-
+ 
+.nav-links {
+    margin-left: auto;
+}
+ 
 .nav-links a {
     margin-left: 2rem;
     text-decoration: none;
@@ -66,9 +115,108 @@ header {
     font-weight: 600;
     transition: color 0.3s;
 }
-
-.nav-links a:hover {
+ 
+.nav-links a:hover,
+.nav-links a.ativo {
     color: var(--primary-color);
+}
+ 
+.nav-acoes {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: 1.5rem;
+}
+
+.icone-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-light);
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.icone-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tema-lua {
+    display: none;
+}
+
+:root[data-theme="ligth"] .tema-sol {
+    display: none;
+}
+
+:root[data-theme="light"] .tema-lua {
+    display: block;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.progresso-barra {
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+@media (max-width: 640px) {
+    .nav-container {
+        padding: 1rem 1.25rem;
+    }
+ 
+    .logo {
+        font-size: 1.1rem;
+    }
+ 
+    .menu-toggle {
+        display: flex;
+    }
+ 
+    .nav-acoes {
+        margin-left: auto;
+    }
+ 
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-left: 0;
+        padding: 0.75rem 1.25rem 1rem;
+        background-color: var(--bg-main);
+        border-bottom: 1px solid var(--border-color);
+    }
+ 
+    .nav-links.aberto {
+        display: flex;
+    }
+ 
+    .nav-links a {
+        margin-left: 0;
+        padding: 0.75rem 0;
+    }
 }
 
 .hero {
@@ -78,22 +226,43 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 60vh;
+    min-height: 50vh;
 }
 
 .hero h2 {
     color: var(--primary-color);
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Fire Code', monospace;
 }
 
 .hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 1.1;
-    margin-bottom: 1rem;
-    font-family: 'Fira Code', monospace;
+    margin-bottom: 1.1rem;
+    font-family: 'Fire Code', monospace;
     font-weight: 400;
+}
+
+.hero .hero-subtitulo {
+    color: var(--text-muted);
+    font-size: clamp(2rem, 5vw, 3,5rem);
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.08em;
+    height: 1em;
+    margin-left: 0.12em;
+    vertical-align: -0.1em;
+    background-color: var(--primary-color);
+    animation: piscar 1s steps(1) infinite;
+}
+
+@keyframes piscar {
+    50% {
+        opacity: 0;
+    }
 }
 
 p {
@@ -101,10 +270,16 @@ p {
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--text-muted);
     max-width: 600px;
     margin-bottom: 2.5rem;
+}
+
+.hero-acoes, .contato-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .btn-primary {
@@ -115,14 +290,35 @@ p {
     border: 2px solid var(--primary-color);
     padding: 15px;
     border-radius: 8px;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Fire Code', monospace;
+    font-size: 1rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: rgba(56, 189, 248, 0.1);
-    transform: translateY(-2px);
+    background-color: var(--primary-soft);
+    transform: translateY(-5px)
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+/*Botao de destaque (Curriculo, Whatsappp)*/
+.btn-primary.btn-preenchido {
+    background-color: transparent;
+    color: var(--primary-color);
+    filter: brightness(1.1);
+}
+
+.btn-primary.btn-preenchido:hover {
+    background-color: var(--primary-soft);
+    transform: translateY(-5px)
 }
 
 .section-padding {
@@ -141,7 +337,7 @@ p {
     align-items: center;
 }
 
-.section-title::before {
+.section-title:before {
     content: "/>";
     font-family: 'Fira Code', monospace;
     color: var(--primary-color);
@@ -156,18 +352,37 @@ p {
     background-color: var(--border-color);
     margin-left: 20px;
 }
-
+ 
+.secao-intro {
+    color: var(--text-muted);
+    margin: -1.5rem 0 2rem;
+    max-width: 650px;
+    text-align: left;
+}
+ 
+.estado {
+    grid-column: 1 / -1;
+    color: var(--text-muted);
+    text-align: left;
+}
+ 
+.estado a,
+.link-github a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+ 
 .about-content {
     display: flex;
     gap: 4rem;
     font-size: 1.1rem;
     color: var(--text-muted);
 }
-
+ 
 .about-text p {
     flex: 2;
 }
-
+ 
 .about-text {
     margin-bottom: 1.5rem;
 }
@@ -177,8 +392,8 @@ p {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 2rem;
-    font-family: 'Fira Code', monospace;
-    font-size: 1rem;
+    font-family: 'Fire Code', monospace;
+    font-size: 1.2rem;
 }
 
 .tech-stack li {
@@ -191,7 +406,36 @@ p {
     margin-right: 10px;
 }
 
-/* ---------- Projetos ---------- */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.filtro {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+ 
+.filtro:hover {
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+ 
+.filtro[aria-pressed="true"] {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: var(--primary-soft);
+}
 
 .projects-grid {
     display: grid;
@@ -203,7 +447,8 @@ p {
     background-color: var(--bg-card);
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, 
+    opacity 0.6s ease, translate 0.6s ease;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
@@ -212,18 +457,6 @@ p {
 .project-card:hover {
     transform: translateY(-8px);
     border-color: var(--primary-color);
-}
-
-.project-card--empty {
-    border-style: dashed;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 260px;
-}
-
-.project-content--empty h3 {
-    color: var(--text-muted);
 }
 
 .project-img {
@@ -245,11 +478,29 @@ p {
     color: var(--text-light);
     margin-bottom: 1rem;
 }
+
 .project-content p {
     color: var(--text-muted);
     margin-bottom: 1.5rem;
     font-size: 0.95rem;
     flex-grow: 1;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.tags li {
+    font-family: 'Fire Code', monospace;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    background-color: var(--primary-soft);
+    padding: 3px 10px;
+    border-radius: 8px;
 }
 
 .project-links {
@@ -258,153 +509,29 @@ p {
     flex-wrap: wrap;
 }
 
-.project-links a {
+.project-links a,
+.project-links button {
     text-decoration: none;
     color: var(--primary-color);
+    background: none;
     font-size: 0.9rem;
     font-weight: 600;
     font-family: 'Fira Code', monospace;
     border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 8px 12px;
+    cursor: pointer;
     transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.project-links a:hover {
+.project-links a:hover,
+.project-links button:hover {
     border-color: var(--primary-color);
     color: var(--text-light);
 }
 
-footer {
-    text-align: center;
-    padding: 4rem 2rem;
-    border-top: 1px solid var(--border-color);
-}
-
-footer p {
-    font-family: 'Fira Code', monospace;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-
-/* Foco visível para quem navega pelo teclado */
-:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 3px;
-}
-
-/* ---------- Link ativo no menu ---------- */
-.nav-links a.ativo {
-    color: var(--primary-color);
-}
-
-/* ---------- Cursor do efeito de digitação ---------- */
-.cursor {
-    display: inline-block;
-    width: 0.08em;
-    height: 1em;
-    margin-left: 0.12em;
-    vertical-align: -0.1em;
-    background-color: var(--primary-color);
-    animation: piscar 1s steps(1) infinite;
-}
-
-@keyframes piscar {
-    50% {
-        opacity: 0;
-    }
-}
-
-/* ---------- Botão do menu mobile (escondido no desktop) ---------- */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
-    background: none;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.menu-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background-color: var(--text-light);
-}
-
-@media (max-width: 640px) {
-    .nav-container {
-        padding: 1rem 1.25rem;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        padding: 0.75rem 1.25rem 1rem;
-        background-color: var(--bg-main);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .nav-links.aberto {
-        display: flex;
-    }
-
-    .nav-links a {
-        margin-left: 0;
-        padding: 0.75rem 0;
-    }
-}
-
-/* ---------- Botão voltar ao topo ---------- */
-.voltar-topo {
-    position: fixed;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Fira Code', monospace;
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, border-color 0.2s ease;
-    z-index: 900;
-}
-
-.voltar-topo.visivel {
-    opacity: 1;
-    visibility: visible;
-}
-
-.voltar-topo:hover {
-    border-color: var(--primary-color);
-}
-
-/* Respeita quem prefere menos animação */
-@media (prefers-reduced-motion: reduce) {
-    .cursor {
-        animation: none;
-    }
+.repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }

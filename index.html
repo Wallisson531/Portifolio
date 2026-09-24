@@ -3,29 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Wallisson Daniel, desenvolvedor em formação em busca da primeira oportunidade como desenvolvedor júnior.">
     <title>Wallisson Daniel / Desenvolvedor</title>
+
+    <script>
+        try {
+            var temaSalvo = localStorage.getItem('tema');
+            if (temaSalvo) document.documentElement.dataset.theme = temaSalvo;
+        } catch (e) {}
+    </script>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="nav-container">
             <a href="#" class="logo">&lt;Wallisson<span> Daniel&gt;</span></a>
-            <nav class="nav-links">
+
+            <nav class="nav-links" id="nav-links" aria-label="Navegação principal">
                 <a href="#sobre">Sobre Mim</a>
                 <a href="#projeto">Projetos</a>
+                <a href="#github">GitHub</a>
                 <a href="#contato">Contatos</a>
             </nav>
+
+            <div class="nav-acoes">
+                
+                <button type="button" id="tema-toggle" class="icone-btn" aria-label="Mudar para tema claro">
+                    <svg class="tema-sol" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                    </svg>
+                    <svg class="tema-lua" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                    </svg>
+                </button>
+
+                <!-- Botão hambúrguer: só aparece em telas pequenas -->
+                <button type="button" id="menu-toggle" class="icone-btn menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Barra de progresso de rolagem -->
+        <div class="progresso" aria-hidden="true">
+            <div class="progresso-barra" id="progresso-barra"></div>
         </div>
     </header>
 
     <section class="hero">
         <h2>Olá, meu nome é</h2>
         <h1>Wallisson Daniel</h1>
-        <h1 id="digitando" style="color: var(--text-muted); font-size: clamp(2rem, 5vw, 3.5rem);">Transformando ideias em soluções digitais</h1>
+        <h1 id="digitando" class="hero-subtitulo">Transformando ideias em soluções digitais</h1>
         <p>Desenvolvedor em formação, apaixonado por tecnologia e por transformar ideias em ferramentas digitais.</p>
-        <div>
+        <div class="hero-acoes">
             <a href="#projeto" class="btn-primary">Confira meus projetos</a>
+          
+            <a href="curriculo/Curriculo_Wallisson_Daniel_22_anos.pdf" class="btn-primary btn-preenchido" download>Baixar currículo</a>
         </div>
     </section>
 
@@ -34,7 +72,7 @@
             <h2 class="section-title">Sobre Mim</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Olá, me chamo Wallisson Daniel, tenho 22 anos e sou de <strong>Cascavel, PR</strong>. Atuo na área de Qualide como Analista de Qualidade e estou cursando o curso superior de <strong>Análise e Desenvolvimento de Sistemas</strong> na Univel. Estou em transição de carreira para a área de tecnologia, trago comigo o conhecimento profissional adquirido em Qualidade e estou em busca da minha primeira oportunidade na área de Desenvolvimento.</p>
+                    <p>Olá, me chamo Wallisson Daniel, tenho 22 anos e sou de <strong>Cascavel, PR</strong>. Atuo na área de Qualidade como Analista de Qualidade e estou cursando o curso superior de <strong>Análise e Desenvolvimento de Sistemas</strong> na Univel. Estou em transição de carreira para a área de tecnologia, trago comigo o conhecimento profissional adquirido em Qualidade e estou em busca da minha primeira oportunidade na área de Desenvolvimento.</p>
                     <br>
                     <p>Aqui estão algumas tecnologias com as quais tenho conhecimento:</p>
                     <ul class="tech-stack">
@@ -52,77 +90,49 @@
     <section id="projeto" class="section-padding">
         <div class="container">
             <h2 class="section-title">Meus Projetos</h2>
-            <div class="projects-grid">
 
-                <div class="project-card">
-                    <img src="imagem/projeto_pet.png" alt="Página inicial do projeto Cantinho do Pet" class="project-img">
-                    <div class="project-content">
-                        <h3>Cantinho do Pet</h3>
-                        <p>Landing page informativa para um pet shop, desenvolvida para colocar em prática meus conhecimentos de HTML e CSS: estrutura semântica, layout responsivo e estilização de seções.</p>
+            <div class="filtros" id="filtros" role="group" aria-label="Filtrar projetos por tecnologia"></div>
+            <div class="projects-grid" id="projetos-grid"></div>
 
-                        <p>
-                            <strong>Tecnlogias:</strong> HTLM - CSS - GIT
-                        </p>
+            <noscript>
+                <p class="estado">Ative o JavaScript para ver os projetos, ou acesse meu perfil direto no
+                    <a href="https://github.com/Wallisson531" target="_blank" rel="noopener">GitHub</a>.</p>
+            </noscript>
+        </div>
+    </section>
 
-                        <div class="project-links">
-                            <a href="https://github.com/Wallisson531/cantinho-do-pet" target="_blank" rel="noopener">Ver código</a>
-                            <a href="https://wallisson531.github.io/cantinho-do-pet/" target="_blank" rel="noopener">Acessar projeto</a>
-                        </div>
-                    </div>
-                </div>
+    <section id="github" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">GitHub</h2>
+            <p class="secao-intro">Meus repositórios públicos mais recentes, carregados direto do GitHub.</p>
 
-                <div class="project-card project-card--empty">
-                    <div class="project-content project-content--empty">
+            <div class="repos-grid" id="repos-grid" aria-live="polite">
+                <p class="estado">Carregando repositórios...</p>
+            </div>
 
-                        <img src="imagem/HelpDesk.png" alt="Página inicial do projeto Cantinho do Pet" class="project-img">
+            <p class="link-github">
+                <a href="https://github.com/Wallisson531" target="_blank" rel="noopener">Ver perfil completo no GitHub</a>
+            </p>
+        </div>
+    </section>
 
-                        <h3>Projeto HelpDesk</h3>
-                        <p>
-                            Sistema de desktop de gerenciamento de chamados de suporte, desenvolvido em Python com interface grafica (Tkinter) e banco de dados MySql, Permite abrir chamados, pesquisar chamados ja abertos e resolver chamados.
-                        </p>
+    <section id="contato" class="section-padding" data-email="wallissondaniel541@gmail.com">
+        <div class="container">
+            <h2 class="section-title">Qual o próximo passo?</h2>
+            <p class="secao-intro">No momento, estou em busca de novas oportunidades como desenvolvedor júnior. Se você tem uma vaga ou uma pergunta, fale comigo pelo WhatsApp, pelo e-mail ou pelo formulário abaixo.</p>
 
-                        <p>
-                            <strong>Tecnlogias:</strong> Python - MySql - XAMPP - SQL
-                        </p>
-
-                         <div class="project-links">
-                            <a href="https://github.com/Wallisson531/Projeto-HelpDesk" target="_blank" rel="noopener">Ver código</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="imagem/projeto_chamadopng.png" alt="Página inicial do projeto Cantinho do Pet" class="project-img">
-                    <div class="project-content">
-                        <h3>Sistema de Cadastro de Funcionario</h3>
-
-                        <p>Sistema de desktop de gerenciamento de cadastro de funcionario, desenvolvido em Python com interface grafica (Tkinter) e banco de dados Sqlite3, Permite cadastra funcionario, atualizar cadastro e excluir o cadastro.</p>
-
-                        <p>
-                            <strong>Tecnlogias:</strong> Python - Tkinter - GIT - SQLITE3
-                        </p>
-
-                        <div class="project-links">
-                            <a href="https://github.com/Wallisson531/cadastro_funcionario" target="_blank" rel="noopener">Ver código</a>
-                        </div>
-                    </div>
-                </div>
-                
+            <div class="contato-acoes">
+                <a href="https://wa.me/5545998315472?text=Ol%C3%A1!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar." class="btn-primary btn-preenchido" target="_blank" rel="noopener">Entrar em contato</a>
+                <button type="button" class="btn-primary" id="copiar-email" aria-live="polite">Copiar e-mail</button>
             </div>
         </div>
     </section>
 
-    <section id="contato" class="section-padding" style="text-align: center; max-width: 600px; margin: 0 auto;">
-        <h2 class="section-title" style="justify-content: center;">&nbsp;Qual o próximo passo?</h2>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">No momento, estou em busca de novas oportunidades como desenvolvedor júnior. Se você tem uma vaga ou uma pergunta, meu WhatsApp está logo abaixo!</p>
-        <a href="https://wa.me/5545998315472?text=Ol%C3%A1!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar." class="btn-primary" target="_blank" rel="noopener">Entrar em contato</a>
-    </section>
-
     <footer>
-        <p>
-            Projetado e Desenvolvido por Wallisson Daniel &copy; <span id="ano">2026</span>
-        </p>
+        <p>Projetado e Desenvolvido por Wallisson Daniel &copy; <span id="ano">2026</span></p>
     </footer>
+
+    <dialog id="modal-projeto" aria-labelledby="modal-titulo"></dialog>
 
     <script src="script.js" defer></script>
 </body>
