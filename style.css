@@ -535,3 +535,98 @@ p {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
 }
+
+.repo-card {
+    background-color: var(--bg-card);
+    border: 1ps solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.3s ease, opacity 0.6s ease, translate 0.6s ease;
+}
+
+.repo-card:hover {
+    background-color: var(--primary-soft);
+}
+
+.repo-card h3 {
+    font-family: 'Fire Code', monospace;
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+}
+
+.repo-card h3 a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+ 
+.repo-card h3 a:hover {
+    text-decoration: underline;
+}
+ 
+.repo-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    flex-grow: 1;
+    text-align: left;
+}
+ 
+.repo-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    list-style: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.link-github {
+    margin-top: 2rem;
+    text-align: left;
+    font-family: 'Fire Code', monospace;
+}
+
+.link-github a {
+    text-decoration: none;
+}
+
+.reveal {
+    opacity: 0;
+    translate: 0 24px;
+}
+ 
+.reveal.revelado {
+    opacity: 1;
+    translate: 0 0;
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        translate: none;
+    }
+ 
+    .cursor {
+        animation: none;
+    }
+}
+
+dialog {
+    margin: auto;
+    padding: 0;
+    width: min(600px, cal(100% - 2rem));
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+}
+
+dialog::backdrop {
+    background-color: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(4px);
+}
+
+.modal-corpo {
+    position: relative;
+}
