@@ -630,3 +630,48 @@ dialog::backdrop {
 .modal-corpo {
     position: relative;
 }
+
+.modal-fechar {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--text-light);
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.modal-fechar:hover {
+    border-color: var(--primary-color);
+}
+
+.modal-img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.modal-texto {
+    padding: 1.5rem;
+}
+
+.modal-texto h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.modal-texto h4 {
+    font-family: "Fire Code", monospace;
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    margin: 1.25rem 0 0.5rem;
+}
+
+
+
