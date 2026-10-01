@@ -1,5 +1,22 @@
+// script.js — Portfólio Wallisson Daniel
+// Carregado com <script src="script.js" defer></script>, então o HTML já existe quando ele roda.
+//
+// Índice:
+//  0. Ajudantes            6. Repositórios do GitHub    11. Menu mobile
+//  1. Seus dados (editar)  7. Botão copiar e-mail       12. Link ativo no menu
+//  2. Animação ao rolar    8. Formulário de contato     13. Progresso + voltar ao topo
+//  3. Cards de projetos    9. Tema claro/escuro
+//  4. Filtro               10. Ano + efeito de digitação
+//  5. Modal de detalhes
+
 const reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ------------------------------------------------------------------
+   0. Ajudantes
+   el('div', { classe: 'card', texto: 'Oi' }, filho1, filho2)
+   cria um elemento sem precisar montar strings de HTML.
+   Usar textContent (e não innerHTML) também evita problemas de segurança.
+------------------------------------------------------------------ */
 function el(tag, props = {}, ...filhos) {
     const no = document.createElement(tag);
     for (const [chave, valor] of Object.entries(props)) {
@@ -12,8 +29,9 @@ function el(tag, props = {}, ...filhos) {
     return no;
 }
 
-/*1. SEUS DADOS — é aqui que você edita quando tiver projeto novo*/
-
+/* ------------------------------------------------------------------
+   1. SEUS DADOS — é aqui que você edita quando tiver projeto novo
+------------------------------------------------------------------ */
 const GITHUB_USUARIO = 'Wallisson531';
 
 // Botões do filtro. O "id" precisa bater com as "categorias" dos projetos.
